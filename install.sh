@@ -110,7 +110,7 @@ error_detect_depends(){
 pre_install_docker_compose(){
     # Set ssrpanel_url
     echo "Please ssrpanel_url"
-    read -p "(There is no default value please make sure you input the right thing):" ssrpanel_url
+    read -p "(没有默认值，请确保您输入的是正确的):" ssrpanel_url
     [ -z "${ssrpanel_url}" ]
     echo
     echo "---------------------------"
@@ -119,7 +119,7 @@ pre_install_docker_compose(){
     echo
     # Set ssrpanel key
     echo "ssrpanel key"
-    read -p "(There is no default value please make sure you input the right thing):" ssrpanel_key
+    read -p "(没有默认值，请确保您输入的是正确的):" ssrpanel_key
     [ -z "${ssrpanel_key}" ]
     echo
     echo "---------------------------"
@@ -128,8 +128,8 @@ pre_install_docker_compose(){
     echo
 
     # Set ssrpanel speedtest function
-    echo "use ssrpanel speedtest"
-    read -p "(ssrpanel speedtest: Default (6) hours every time):" ssrpanel_speedtest
+    echo "use ssrpanel speedtest默认"
+    read -p "(ssrpanel speedtest: 默认 (6) hours every time):" ssrpanel_speedtest
     [ -z "${ssrpanel_speedtest}" ] && ssrpanel_speedtest=6
     echo
     echo "---------------------------"
@@ -138,7 +138,7 @@ pre_install_docker_compose(){
     echo
 
     # Set ssrpanel node_id
-    echo "ssrpanel node_id"
+    echo "ssrpanel 节点ID"
     read -p "(Default value: 0 ):" ssrpanel_node_id
     [ -z "${ssrpanel_node_id}" ] && ssrpanel_node_id=0
     echo
@@ -148,7 +148,7 @@ pre_install_docker_compose(){
     echo
 
     # Set V2ray backend API Listen port
-    echo "Setting V2ray backend API Listen port"
+    echo "Setting V2ray backend API Listen port默认"
     read -p "(V2ray API Listen port(Default 2333):" v2ray_api_port
     [ -z "${v2ray_api_port}" ] && v2ray_api_port=2333
     echo
@@ -158,7 +158,7 @@ pre_install_docker_compose(){
     echo
 
     # Set Setting if the node go downwith panel
-    echo "Setting if the node go downwith panel"
+    echo "Setting if the node go downwith panel默认"
     read -p "(v2ray_downWithPanel (Default 1):" v2ray_downWithPanel
     [ -z "${v2ray_downWithPanel}" ] && v2ray_downWithPanel=1
     echo
@@ -171,7 +171,7 @@ pre_install_docker_compose(){
 pre_install_caddy(){
 
     # Set caddy v2ray domain
-    echo "caddy v2ray domain"
+    echo "caddy v2ray domain前端面板设置的域名"
     read -p "(There is no default value please make sure you input the right thing):" v2ray_domain
     [ -z "${v2ray_domain}" ]
     echo
@@ -182,7 +182,7 @@ pre_install_caddy(){
 
 
     # Set caddy v2ray path
-    echo "caddy v2ray path"
+    echo "caddy v2ray path默认"
     read -p "(Default path: /v2ray):" v2ray_path
     [ -z "${v2ray_path}" ] && v2ray_path="/v2ray"
     echo
@@ -192,7 +192,7 @@ pre_install_caddy(){
     echo
 
     # Set caddy v2ray tls email
-    echo "caddy v2ray tls email"
+    echo "caddy v2ray tls email邮箱"
     read -p "(No default ):" v2ray_email
     [ -z "${v2ray_email}" ]
     echo
@@ -202,7 +202,7 @@ pre_install_caddy(){
     echo
 
     # Set Caddy v2ray listen port
-    echo "caddy v2ray local listen port"
+    echo "caddy v2ray local listen port默认对接端口"
     read -p "(Default port: 10550):" v2ray_local_port
     [ -z "${v2ray_local_port}" ] && v2ray_local_port=10550
     echo
@@ -212,7 +212,7 @@ pre_install_caddy(){
     echo
 
     # Set Caddy  listen port
-    echo "caddy listen port"
+    echo "caddy listen port默认"
     read -p "(Default port: 443):" caddy_listen_port
     [ -z "${caddy_listen_port}" ] && caddy_listen_port=443
     echo
@@ -232,7 +232,7 @@ config_docker(){
     echo "install curl"
     install_dependencies
     echo "Writing docker-compose.yml"
-    curl -L https://raw.githubusercontent.com/hulisang/v2ray-sspanel-v3-mod_Uim-plugin/master/Docker/V2ray/docker-compose.yml > docker-compose.yml
+    curl -L https://raw.githubusercontent.com/zzhandou/v2ray-sspanel-v3-mod_Uim-plugin/master/Docker/V2ray/docker-compose.yml > docker-compose.yml
     sed -i "s|node_id:.*|node_id: ${ssrpanel_node_id}|"  ./docker-compose.yml
     sed -i "s|sspanel_url:.*|sspanel_url: '${ssrpanel_url}'|"  ./docker-compose.yml
     sed -i "s|key:.*|key: '${ssrpanel_key}'|"  ./docker-compose.yml
@@ -249,9 +249,9 @@ config_caddy_docker(){
     cd ${cur_dir}
     echo "install curl"
     install_dependencies
-    curl -L https://raw.githubusercontent.com/hulisang/v2ray-sspanel-v3-mod_Uim-plugin/master/Docker/Caddy_V2ray/Caddyfile >  Caddyfile
+    curl -L https://raw.githubusercontent.com/zzhandou/v2ray-sspanel-v3-mod_Uim-plugin/master/Docker/Caddy_V2ray/Caddyfile >  Caddyfile
     echo "Writing docker-compose.yml"
-    curl -L https://raw.githubusercontent.com/hulisang/v2ray-sspanel-v3-mod_Uim-plugin/master/Docker/Caddy_V2ray/docker-compose.yml > docker-compose.yml
+    curl -L https://raw.githubusercontent.com/zzhandou/v2ray-sspanel-v3-mod_Uim-plugin/master/Docker/Caddy_V2ray/docker-compose.yml > docker-compose.yml
     sed -i "s|node_id:.*|node_id: ${ssrpanel_node_id}|"  ./docker-compose.yml
     sed -i "s|sspanel_url:.*|sspanel_url: '${ssrpanel_url}'|"  ./docker-compose.yml
     sed -i "s|key:.*|key: '${ssrpanel_key}'|"  ./docker-compose.yml
@@ -295,9 +295,9 @@ config_caddy_docker_cloudflare(){
     echo "install curl first "
     install_dependencies
     echo "Starting Writing Caddy file and docker-compose.yml"
-    curl -L https://raw.githubusercontent.com/hulisang/v2ray-sspanel-v3-mod_Uim-plugin/master/Docker/Caddy_V2ray/Caddyfile >Caddyfile
+    curl -L https://raw.githubusercontent.com/zzhandou/v2ray-sspanel-v3-mod_Uim-plugin/master/Docker/Caddy_V2ray/Caddyfile >Caddyfile
     epcho "Writing docker-compose.yml"
-    curl -L https://raw.githubusercontent.com/hulisang/v2ray-sspanel-v3-mod_Uim-plugin/master/Docker/Caddy_V2ray/docker-compose.yml >docker-compose.yml
+    curl -L https://raw.githubusercontent.com/zzhandou/v2ray-sspanel-v3-mod_Uim-plugin/master/Docker/Caddy_V2ray/docker-compose.yml >docker-compose.yml
     sed -i "s|node_id:.*|node_id: ${ssrpanel_node_id}|"  ./docker-compose.yml
     sed -i "s|sspanel_url:.*|sspanel_url: '${ssrpanel_url}'|"  ./docker-compose.yml
     sed -i "s|key:.*|key: '${ssrpanel_key}'|"  ./docker-compose.yml
